@@ -1,0 +1,10 @@
+griffin-world: griffin
+griffin:
+  start-location:
+    x: 100
+    y: 50
+    z: 100
+  end-location:
+    x: 200
+    y: 100
+    z: 200
