@@ -1,7 +1,6 @@
 package me.lidan.griffinAddon.griffin;
 
 import lombok.Data;
-import me.lidan.cavecrawlers.griffin.GriffinDrop;
 import org.bukkit.Location;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.entity.Player;

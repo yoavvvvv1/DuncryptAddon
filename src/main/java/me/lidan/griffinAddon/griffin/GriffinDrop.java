@@ -8,7 +8,6 @@ import me.lidan.cavecrawlers.drops.Drop;
 import me.lidan.cavecrawlers.drops.DropType;
 import me.lidan.cavecrawlers.entities.EntityManager;
 import me.lidan.cavecrawlers.entities.LootShareEntityData;
-import me.lidan.cavecrawlers.griffin.GriffinManager;
 import me.lidan.cavecrawlers.objects.ConfigMessage;
 import org.bukkit.Location;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
@@ -16,8 +15,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
@@ -26,8 +23,7 @@ import java.util.Map;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 public class GriffinDrop extends Drop implements ConfigurationSerializable {
-    private static final Logger log = LoggerFactory.getLogger(GriffinDrop.class);
-    private static final me.lidan.cavecrawlers.griffin.GriffinManager griffinManager = GriffinManager.getInstance();
+    private static final GriffinManager griffinManager = GriffinManager.getInstance();
     private static final EntityManager entityManager = EntityManager.getInstance();
     public static final int DAMAGE_THRESHOLD_PERCENT = 10;
     private final ConfigMessage COINS_MESSAGE = ConfigMessage.getMessageOrDefault("griffin_coins_message", "&e&lGRIFFIN! You got %amount% coins!");
@@ -38,11 +34,9 @@ public class GriffinDrop extends Drop implements ConfigurationSerializable {
         if (announce == null) {
             if (this.type == DropType.COINS) {
                 this.announce = COINS_MESSAGE;
-            }
-            else if (this.type == DropType.MOB) {
+            } else if (this.type == DropType.MOB) {
                 this.announce = MOB_MESSAGE;
-            }
-            else if (this.type == DropType.ITEM) {
+            } else if (this.type == DropType.ITEM) {
                 this.announce = Drop.RARE_DROP_MESSAGE;
             }
         }

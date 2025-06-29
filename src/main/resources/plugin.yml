@@ -4,4 +4,6 @@ main: me.lidan.griffinAddon.GriffinAddon
 api-version: '1.19'
 authors: [ LidanTheDev ]
 description: Griffin addon for CaveCrawlers
-depend: [CaveCrawlers]
+depend:
+  - CaveCrawlers
+  - MythicMobs

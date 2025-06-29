@@ -1,15 +1,14 @@
 package me.lidan.griffinAddon.griffin;
 
-import me.lidan.cavecrawlers.griffin.GriffinDrops;
-import me.lidan.cavecrawlers.griffin.GriffinManager;
+
 import me.lidan.cavecrawlers.objects.ConfigLoader;
 
-public class GriffinLoader extends ConfigLoader<me.lidan.cavecrawlers.griffin.GriffinDrops> {
+public class GriffinLoader extends ConfigLoader<GriffinDrops> {
     private static GriffinLoader instance;
     private final GriffinManager griffinManager;
 
     private GriffinLoader() {
-        super(me.lidan.cavecrawlers.griffin.GriffinDrops.class, "griffin");
+        super(GriffinDrops.class, "griffin");
         griffinManager = GriffinManager.getInstance();
     }
 

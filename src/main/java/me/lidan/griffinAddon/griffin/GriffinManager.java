@@ -2,15 +2,13 @@ package me.lidan.griffinAddon.griffin;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import me.lidan.cavecrawlers.CaveCrawlers;
-import me.lidan.cavecrawlers.griffin.GriffinDrops;
-import me.lidan.cavecrawlers.griffin.GriffinProtection;
 import me.lidan.cavecrawlers.integration.MythicMobsHook;
 import me.lidan.cavecrawlers.items.ItemInfo;
 import me.lidan.cavecrawlers.items.ItemsManager;
 import me.lidan.cavecrawlers.items.Rarity;
-import me.lidan.cavecrawlers.items.abilities.SpadeAbility;
 import me.lidan.cavecrawlers.utils.BukkitUtils;
+import me.lidan.griffinAddon.GriffinAddon;
+import me.lidan.griffinAddon.abilities.SpadeAbility;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -29,9 +27,9 @@ import java.util.UUID;
 @Slf4j
 @Data
 public class GriffinManager {
-    private static final CaveCrawlers plugin = CaveCrawlers.getInstance();
+    public static final Map<Rarity, GriffinDrops> grffinDropsMap = new HashMap<>();
     public static final int MAX_DISTANCE = 110;
-    public static final Map<Rarity, me.lidan.cavecrawlers.griffin.GriffinDrops> grffinDropsMap = new HashMap<>();
+    private static final GriffinAddon plugin = GriffinAddon.getInstance();
     public static final String WORLD_NAME = plugin.getConfig().getString("griffin-world", "griffin");
     public static final int DEFAULT_PROTECTION_TIME = 5000;
     private static GriffinManager instance;
@@ -147,13 +145,10 @@ public class GriffinManager {
     }
 
     public Entity spawnMob(String mob, Location location, Player player) {
-        if (plugin.getMythicBukkit() != null) {
-            Entity entity = MythicMobsHook.getInstance().spawnMythicMob(mob, location);
-            if (entity == null) return null;
-            protectMobForPlayer(player, entity);
-            return entity;
-        }
-        return null;
+        Entity entity = MythicMobsHook.getInstance().spawnMythicMob(mob, location);
+        if (entity == null) return null;
+        protectMobForPlayer(player, entity);
+        return entity;
     }
 
     public void protectMobForPlayer(Player player, Entity entity) {
