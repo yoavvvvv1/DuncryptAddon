@@ -16,6 +16,11 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import revxrsal.commands.bukkit.BukkitCommandHandler;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 public final class GriffinAddon extends JavaPlugin implements Listener {
 
     public static GriffinAddon getInstance() {
@@ -86,5 +91,32 @@ public final class GriffinAddon extends JavaPlugin implements Listener {
 
     private void registerDrops() {
         DropLoader.getInstance().load();
+    }
+
+    /**
+     * Save a resource to a file path
+     * Used to save resources to subdirectories in the plugin folder
+     *
+     * @param resource the resource
+     * @param path     the path as File object
+     */
+    public void saveResource(String resource, File path) {
+        if (!path.exists()) {
+            path.getParentFile().mkdirs();
+            try (InputStream in = getResource(resource);
+                 FileOutputStream out = new FileOutputStream(path)) {
+                if (in == null) {
+                    getLogger().warning("Resource not found: " + resource);
+                    return;
+                }
+                byte[] buffer = new byte[1024];
+                int length;
+                while ((length = in.read(buffer)) > 0) {
+                    out.write(buffer, 0, length);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
