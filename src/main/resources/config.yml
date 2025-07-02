@@ -1,5 +1,5 @@
-griffin-world: griffin
 griffin:
+  world: griffin
   start-location:
     x: 100
     y: 50

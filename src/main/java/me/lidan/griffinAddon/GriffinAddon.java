@@ -23,6 +23,8 @@ import java.io.InputStream;
 
 public final class GriffinAddon extends JavaPlugin implements Listener {
 
+    public static final int BUFFER_SIZE = 1024;
+
     public static GriffinAddon getInstance() {
         return GriffinAddon.getPlugin(GriffinAddon.class);
     }
@@ -31,8 +33,7 @@ public final class GriffinAddon extends JavaPlugin implements Listener {
     public void onEnable() {
         // Plugin startup logic
 
-        getConfig().options().copyDefaults(true);
-        saveDefaultConfig();
+        saveDefaultResources();
         registerSerializers();
         registerAbilities();
         registerGriffin();
@@ -40,6 +41,20 @@ public final class GriffinAddon extends JavaPlugin implements Listener {
         registerCommands();
         registerEvents();
         getLogger().info("GriffinAddon has been enabled!");
+    }
+
+    /**
+     * Save default resources
+     */
+    private void saveDefaultResources() {
+        if (getDataFolder().exists()) {
+            return;
+        }
+        getLogger().info("Detected first time setup, saving default resources");
+        getConfig().options().copyDefaults(true);
+        saveDefaultConfig();
+        getDataFolder().mkdir();
+        saveResource("COMMON.yml", new File(getDataFolder(), "griffin/COMMON.yml"));
     }
 
     private void registerAbilities() {
@@ -98,7 +113,7 @@ public final class GriffinAddon extends JavaPlugin implements Listener {
      * Used to save resources to subdirectories in the plugin folder
      *
      * @param resource the resource
-     * @param path     the path as File object
+     * @param path     the path as a File object
      */
     public void saveResource(String resource, File path) {
         if (!path.exists()) {
@@ -109,7 +124,7 @@ public final class GriffinAddon extends JavaPlugin implements Listener {
                     getLogger().warning("Resource not found: " + resource);
                     return;
                 }
-                byte[] buffer = new byte[1024];
+                byte[] buffer = new byte[BUFFER_SIZE];
                 int length;
                 while ((length = in.read(buffer)) > 0) {
                     out.write(buffer, 0, length);

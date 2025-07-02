@@ -1,0 +1,23 @@
+COMMON:
+  ==: me.lidan.griffinAddon.griffin.GriffinDrops
+  drops:
+    - ==: me.lidan.griffinAddon.griffin.GriffinDrop
+      chance: 25.0
+      value: GOLD_INGOT 1-2
+      type: item
+    - ==: me.lidan.griffinAddon.griffin.GriffinDrop
+      chance: 50.0
+      value: SkeletalMinion
+      type: mob
+    - ==: me.lidan.griffinAddon.griffin.GriffinDrop
+      chance: 30.0
+      value: StaticallyChargedSheep
+      type: mob
+    - ==: me.lidan.griffinAddon.griffin.GriffinDrop
+      chance: 30.0
+      value: SkeletonKing
+      type: mob
+    - ==: me.lidan.griffinAddon.griffin.GriffinDrop
+      chance: 100.0
+      value: 1000-5000
+      type: coins

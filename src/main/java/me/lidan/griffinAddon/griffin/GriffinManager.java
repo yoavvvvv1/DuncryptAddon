@@ -30,7 +30,7 @@ public class GriffinManager {
     public static final Map<Rarity, GriffinDrops> grffinDropsMap = new HashMap<>();
     public static final int MAX_DISTANCE = 110;
     private static final GriffinAddon plugin = GriffinAddon.getInstance();
-    public static final String WORLD_NAME = plugin.getConfig().getString("griffin-world", "griffin");
+    public static final String WORLD_NAME = plugin.getConfig().getString("griffin.world", "griffin");
     public static final int DEFAULT_PROTECTION_TIME = 5000;
     private static GriffinManager instance;
     private HashMap<UUID, Block> griffinMap = new HashMap<>();
