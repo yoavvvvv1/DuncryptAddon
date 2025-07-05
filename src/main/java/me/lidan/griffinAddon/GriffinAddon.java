@@ -1,17 +1,17 @@
 package me.lidan.griffinAddon;
 
 import me.lidan.cavecrawlers.CaveCrawlers;
+import me.lidan.cavecrawlers.stats.StatType;
 import me.lidan.griffinAddon.abilities.SpadeAbility;
 import me.lidan.griffinAddon.griffin.GriffinCommand;
 import me.lidan.griffinAddon.griffin.GriffinDrop;
 import me.lidan.griffinAddon.griffin.GriffinDrops;
 import me.lidan.griffinAddon.griffin.GriffinLoader;
 import me.lidan.griffinAddon.listeners.GriffinListener;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import revxrsal.commands.bukkit.BukkitCommandHandler;
 
@@ -23,6 +23,9 @@ import java.io.InputStream;
 public final class GriffinAddon extends JavaPlugin implements Listener {
 
     public static final int BUFFER_SIZE = 1024;
+
+    // this stat doesn't do anything, it's just to demo custom stats
+    public static final StatType GRIFFIN_LEVEL = new StatType("Griffin Level", "G", ChatColor.RED, 0, ChatColor.RED);
 
     public static GriffinAddon getInstance() {
         return GriffinAddon.getPlugin(GriffinAddon.class);
@@ -38,6 +41,9 @@ public final class GriffinAddon extends JavaPlugin implements Listener {
         registerGriffin();
         registerCommands();
         registerEvents();
+
+        CaveCrawlers.getAPI().getStatsAPI().register("GRIFFIN_LEVEL", GRIFFIN_LEVEL);
+
         getLogger().info("GriffinAddon has been enabled!");
     }
 
@@ -89,11 +95,6 @@ public final class GriffinAddon extends JavaPlugin implements Listener {
      */
     private void registerGriffin() {
         GriffinLoader.getInstance().load();
-    }
-
-    @EventHandler(ignoreCancelled = true)
-    public void onBlockBreak(BlockBreakEvent event) {
-        getLogger().info("Block broken: " + event.getBlock().getType() + " by " + event.getPlayer().getName());
     }
 
     @Override
