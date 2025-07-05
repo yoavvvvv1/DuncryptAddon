@@ -7,7 +7,6 @@ import me.lidan.griffinAddon.griffin.GriffinDrop;
 import me.lidan.griffinAddon.griffin.GriffinDrops;
 import me.lidan.griffinAddon.griffin.GriffinLoader;
 import me.lidan.griffinAddon.listeners.GriffinListener;
-import me.lidan.griffinAddon.loaders.DropLoader;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.event.EventHandler;
@@ -37,7 +36,6 @@ public final class GriffinAddon extends JavaPlugin implements Listener {
         registerSerializers();
         registerAbilities();
         registerGriffin();
-        registerDrops();
         registerCommands();
         registerEvents();
         getLogger().info("GriffinAddon has been enabled!");
@@ -102,10 +100,6 @@ public final class GriffinAddon extends JavaPlugin implements Listener {
     public void onDisable() {
         // Plugin shutdown logic
         Bukkit.getScheduler().cancelTasks(this);
-    }
-
-    private void registerDrops() {
-        DropLoader.getInstance().load();
     }
 
     /**
