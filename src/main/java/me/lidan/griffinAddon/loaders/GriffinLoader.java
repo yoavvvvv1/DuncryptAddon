@@ -1,8 +1,10 @@
-package me.lidan.griffinAddon.griffin;
+package me.lidan.griffinAddon.loaders;
 
 
 import me.lidan.cavecrawlers.objects.ConfigLoader;
 import me.lidan.griffinAddon.GriffinAddon;
+import me.lidan.griffinAddon.griffin.GriffinDrops;
+import me.lidan.griffinAddon.griffin.GriffinManager;
 
 import java.io.File;
 
