@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class SpadeAbility extends ClickAbility {
-    GriffinManager griffinManager = GriffinManager.getInstance();
+    private final GriffinManager griffinManager = GriffinManager.getInstance();
     private int range = 100;
 
     public SpadeAbility() {
